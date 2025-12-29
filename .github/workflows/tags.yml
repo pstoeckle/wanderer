@@ -11,7 +11,7 @@ jobs:
     with:
       context: ./db
       dockerfile: ./db/Dockerfile
-      image-author: TODO
+      image-authors: TODO
       image-description: "Wanderer Database Image"
       image-name: pstoeckle/wanderer/wanderer-db
       image-registry: ghcr.io
@@ -25,7 +25,7 @@ jobs:
     with:
       context: ./web
       dockerfile: ./web/Dockerfile
-      image-author: TODO
+      image-authors: TODO
       image-description: "Wanderer Web Image"
       image-name: pstoeckle/wanderer/wanderer-web
       image-registry: ghcr.io
@@ -39,7 +39,7 @@ jobs:
     with:
       context: ./search
       dockerfile: ./search/Dockerfile
-      image-author: TODO
+      image-authors: TODO
       image-description: "Wanderer Search Image"
       image-name: pstoeckle/wanderer/wanderer-search
       image-registry: ghcr.io
