@@ -1,4 +1,4 @@
-FROM curlimages/curl:8.17.0 AS download-env
+FROM curlimages/curl:8.17.0@sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40 AS download-env
 
 ENV CURL_VERSION=8.17.0
 
@@ -27,7 +27,7 @@ RUN set -eux ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;
 
-FROM golang AS build
+FROM golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 AS build
 
 WORKDIR /app
 
