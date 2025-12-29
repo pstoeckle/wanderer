@@ -11,9 +11,10 @@ jobs:
     with:
       context: ./db
       dockerfile: ./db/Dockerfile
+      image-author: TODO
       image-description: "Wanderer Database Image"
-      image-registry: ghcr.io
       image-name: pstoeckle/wanderer/wanderer-db
+      image-registry: ghcr.io
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       image-title: "Wanderer Database Image"
     permissions:
@@ -24,9 +25,10 @@ jobs:
     with:
       context: ./web
       dockerfile: ./web/Dockerfile
+      image-author: TODO
       image-description: "Wanderer Web Image"
-      image-registry: ghcr.io
       image-name: pstoeckle/wanderer/wanderer-web
+      image-registry: ghcr.io
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       image-title: "Wanderer Web Image"
     permissions:
@@ -37,9 +39,10 @@ jobs:
     with:
       context: ./search
       dockerfile: ./search/Dockerfile
+      image-author: TODO
       image-description: "Wanderer Search Image"
-      image-registry: ghcr.io
       image-name: pstoeckle/wanderer/wanderer-search
+      image-registry: ghcr.io
       image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
       image-title: "Wanderer Search Image"
     permissions:
