@@ -54,6 +54,17 @@ jobs:
       image-digest: ${{ steps.docker_build.outputs.digest }}
 
     steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ inputs.image-registry }}/${{ inputs.image-name }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
       - name: Checkout repository
         uses: actions/checkout@v6.0.1
 
@@ -89,4 +100,4 @@ jobs:
           platforms: "linux/amd64,linux/arm64"
           annotations: ${{ steps.meta.outputs.annotations }}
           push: true
-          tags: ${{ inputs.image-registry }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
+          tags: ${{ steps.meta.outputs.tags }}
