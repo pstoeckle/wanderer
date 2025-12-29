@@ -6,7 +6,7 @@ RUN set -eux ; \
     ARCHITECTURE="$(uname -m)" ; \
     case $ARCHITECTURE in \
     x86_64) ARCHITECTURE="x86_64" ;; \
-    aarch64 | armv8* | arm64) ARCHITECTURE="aarch64-glibc" ;; \
+    aarch64 | armv8* | arm64) ARCHITECTURE="aarch64" ;; \
     *) \
     echo "(!) Architecture $ARCHITECTURE unsupported" ; \
     exit 1 \
@@ -22,7 +22,7 @@ RUN set -eux ; \
     --show-error \
     --silent \
     --tlsv1.2 \
-    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-${CURL_VERSION}.tar.xz" \
+    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-glibc-${CURL_VERSION}.tar.xz" \
     ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;

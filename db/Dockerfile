@@ -6,7 +6,7 @@ RUN set -eux ; \
     ARCHITECTURE="$(uname -m)" ; \
     case $ARCHITECTURE in \
     x86_64) ARCHITECTURE="x86_64" ;; \
-    aarch64 | armv8* | arm64) ARCHITECTURE="aarch64-glibc" ;; \
+    aarch64 | armv8* | arm64) ARCHITECTURE="aarch64" ;; \
     *) \
     echo "(!) Architecture $ARCHITECTURE unsupported" ; \
     exit 1 \
@@ -22,12 +22,12 @@ RUN set -eux ; \
     --show-error \
     --silent \
     --tlsv1.2 \
-    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-${CURL_VERSION}.tar.xz" \
+    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-glibc-${CURL_VERSION}.tar.xz" \
     ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;
 
-FROM golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02 AS build
+FROM golang:1.24.0@sha256:3f7444391c51a11a039bf0359ee81cc64e663c17d787ad0e637a4de1a3f62a71 AS build
 
 WORKDIR /app
 
