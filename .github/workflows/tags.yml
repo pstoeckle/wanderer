@@ -2,8 +2,8 @@ name: Tag Workflow
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "*.*.*"
 
 jobs:
   build-db:
