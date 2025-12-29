@@ -1,0 +1,47 @@
+name: Tag Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-db:
+    uses: ./.github/workflows/docker.yml
+    with:
+      context: ./db
+      dockerfile: ./db/Dockerfile
+      image-description: "Wanderer Database Image"
+      image-registry: ghcr.io
+      image-name: pstoeckle/wanderer/wanderer-db
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Wanderer Database Image"
+    permissions:
+      contents: read
+      packages: write
+  build-web:
+    uses: ./.github/workflows/docker.yml
+    with:
+      context: ./web
+      dockerfile: ./web/Dockerfile
+      image-description: "Wanderer Web Image"
+      image-registry: ghcr.io
+      image-name: pstoeckle/wanderer/wanderer-web
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Wanderer Web Image"
+    permissions:
+      contents: read
+      packages: write
+  build-search:
+    uses: ./.github/workflows/docker.yml
+    with:
+      context: ./search
+      dockerfile: ./search/Dockerfile
+      image-description: "Wanderer Search Image"
+      image-registry: ghcr.io
+      image-name: pstoeckle/wanderer/wanderer-search
+      image-tag: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+      image-title: "Wanderer Search Image"
+    permissions:
+      contents: read
+      packages: write
