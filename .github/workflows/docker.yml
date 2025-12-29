@@ -54,17 +54,6 @@ jobs:
       image-digest: ${{ steps.docker_build.outputs.digest }}
 
     steps:
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ${{ inputs.image-registry }}/${{ inputs.image-name }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
       - name: Checkout repository
         uses: actions/checkout@v6.0.1
 
@@ -83,7 +72,13 @@ jobs:
         uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ${{ inputs.image-name }}
+          images: |
+            ${{ inputs.image-registry }}/${{ inputs.image-name }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
           annotations: |
             org.opencontainers.image.title=${{ inputs.image-title }}
             org.opencontainers.image.authors=${{ inputs.image-authors }}
