@@ -22,7 +22,7 @@ RUN set -eux ; \
     --show-error \
     --silent \
     --tlsv1.2 \
-    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-glibc-${CURL_VERSION}.tar.xz" \
+    "https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-${ARCHITECTURE}-musl-${CURL_VERSION}.tar.xz" \
     ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;
