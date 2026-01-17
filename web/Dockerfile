@@ -1,6 +1,6 @@
-FROM curlimages/curl:8.17.0 AS download-env
+FROM curlimages/curl:8.18.0 AS download-env
 
-ENV CURL_VERSION=8.17.0
+ENV CURL_VERSION=8.18.0
 
 RUN set -eux ; \
     ARCHITECTURE="$(uname -m)" ; \
@@ -27,7 +27,7 @@ RUN set -eux ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;
 
-FROM node:22-bookworm@sha256:c8abd8da9cfddd2dfd2d5aa9ea2e54f9f70d3968ecf81bf5c2422594fa13fa83 AS build-env
+FROM node:22-bookworm@sha256:cd7bcd2e7a1e6f72052feb023c7f6b722205d3fcab7bbcbd2d1bfdab10b1e935 AS build-env
 
 WORKDIR /app
 
@@ -39,7 +39,7 @@ COPY . .
 
 RUN npm run build
 
-FROM gcr.io/distroless/nodejs22-debian12:nonroot@sha256:9187fd451b5e2d258d691cb7da51020bfc8f557cc4a58e80b38f3f30bbbc37f9
+FROM gcr.io/distroless/nodejs22-debian12:nonroot@sha256:3296bcae4c1f2feedaf8cd30f65004804eee7b9e968630659e2cc4aa3b8e3ac1
 
 WORKDIR /app/uploads
 WORKDIR /app
@@ -57,4 +57,4 @@ ENV \
     PUBLIC_OVERPASS_API_URL= \
     PUBLIC_POCKETBASE_URL=http://127.0.0.1:8090 \
     UPLOAD_PASSWORD= \
-    UPLOAD_USER= \
+    UPLOAD_USER=
