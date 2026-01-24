@@ -6,3 +6,4 @@
 !src
 !static
 !tsconfig.json
+!cron.sh

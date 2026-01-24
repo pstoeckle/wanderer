@@ -28,7 +28,7 @@ RUN set -eux ; \
     tar -xJf /tmp/curl.tar.xz -C /tmp ; \
     chmod +x /tmp/curl ;
 
-FROM node:22-bookworm@sha256:c8abd8da9cfddd2dfd2d5aa9ea2e54f9f70d3968ecf81bf5c2422594fa13fa83 AS build-env
+FROM node:22-alpine AS build-env
 
 WORKDIR /app
 
@@ -40,15 +40,17 @@ COPY . .
 
 RUN npm run build
 
-FROM gcr.io/distroless/nodejs22-debian12:nonroot@sha256:9187fd451b5e2d258d691cb7da51020bfc8f557cc4a58e80b38f3f30bbbc37f9
+FROM node:22-alpine
 
 WORKDIR /app/uploads
 WORKDIR /app
 
 COPY --from=download-env /tmp/curl /curl
 COPY --from=build-env /app /app
+COPY ./cron.sh /etc/periodic/15min/cron
+RUN chmod +x /etc/periodic/15min/cron
 
-CMD ["build/index.js"]
+CMD crond && node build
 
 EXPOSE 3000
 
